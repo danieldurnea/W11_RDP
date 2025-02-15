@@ -1,4 +1,18 @@
+   - name: Build and cache
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: false
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
+    # Temp fix for https://github.com/docker/build-push-action/issues/252
+
+    - name: Move cache
+      run: |
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+# https://www.sharepointdiary.com/2020/09/powershell-sleep-co
 name: CI Windows
 
 on: [workflow_dispatch]
@@ -37,7 +51,7 @@ jobs:
           $n += 1
         }
       shell: pwsh
-# https://www.sharepointdiary.com/2020/09/powershell-sleep-command.html
+    mmand.html
 # https://www.javatpoint.com/powershell-while-loop#:~:text=Syntax%20of%20While%20loop&text=The%20condition%20returns%20the%20Boolean,the%20statement%20after%20the%20loop.
 # https://geekeefy.wordpress.com/2015/06/11/powershell-infinite-loops-for-testing-purpose/
 # https://stackoverflow.com/questions/34322988/view-random-ngrok-url-when-run-in-background
